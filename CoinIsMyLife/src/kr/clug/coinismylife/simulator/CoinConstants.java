@@ -16,6 +16,19 @@ public class CoinConstants {
 	public static int INDEX_BTG   = 10;
 	public static int INDEX_EOS   = 11;
 	
-;
-	
+	public static int getCoinIndex(String key) {
+		if (key.equals("BTC"))       return INDEX_BTC;
+		else if (key.equals("ETH"))  return INDEX_ETH;
+		else if (key.equals("DASH")) return INDEX_DASH;
+		else if (key.equals("LTC"))  return INDEX_LTC;
+		else if (key.equals("ETC"))  return INDEX_ETC;
+		else if (key.equals("XRP"))  return INDEX_XRP;
+		else if (key.equals("BCH"))  return INDEX_BCH;
+		else if (key.equals("XMR"))  return INDEX_XMR;
+		else if (key.equals("ZEC"))  return INDEX_ZEC;
+		else if (key.equals("QTUM")) return INDEX_QTUM;
+		else if (key.equals("BTG"))  return INDEX_BTG;
+		else if (key.equals("EOS"))  return INDEX_EOS;
+		else return -1;
+	}
 }
