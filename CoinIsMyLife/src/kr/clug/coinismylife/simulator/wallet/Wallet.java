@@ -13,6 +13,7 @@ public final class Wallet {
 	public Wallet(String id) {
 		this.id = id;
 		this.orderList = new ArrayList<>();
+		this.coinAmount = new double[CoinConstants.AMOUNT_COIN];
 	}
 	
 	public String getId() {return id;}
