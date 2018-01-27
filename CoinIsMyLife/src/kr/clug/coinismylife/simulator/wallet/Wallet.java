@@ -1,10 +1,10 @@
-package kr.clug.coinismylife.simulator;
+package kr.clug.coinismylife.simulator.wallet;
 
-public class Wallet {
+public final class Wallet {
 	
 	private String id;
 	private int money;
-	private double coin[];
+	private double coinAmount[];
 	public String getId() {
 		return id;
 	}
@@ -20,11 +20,11 @@ public class Wallet {
 	public void setMoney(int money) {
 		this.money = money;
 	}
-	public double[] getCoin() {
-		return coin;
+	public double[] getCoinAmount() {
+		return coinAmount;
 	}
-	public void setCoin(double coin[]) {
-		this.coin = coin;
+	public void setCoin(double coinAmount[]) {
+		this.coinAmount = coinAmount;
 	}
 	
 	
