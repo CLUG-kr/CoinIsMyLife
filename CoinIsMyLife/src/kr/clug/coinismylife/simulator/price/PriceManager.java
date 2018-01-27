@@ -4,7 +4,7 @@ import java.net.MalformedURLException;
 
 import kr.clug.coinismylife.simulator.CoinConstants;
 
-public class PriceManager {
+public final class PriceManager {
 	
 	private PriceFetcher priceFetcher;
 	private volatile/*값 할당 등에서 atomic 하게 되도록 함.*/ double[] coinPrices = new double[CoinConstants.AMOUNT_COIN];

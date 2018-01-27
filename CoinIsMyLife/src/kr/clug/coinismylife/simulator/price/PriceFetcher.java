@@ -13,25 +13,25 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class PriceFetcher {
+public final class PriceFetcher {
 	
 	Thread priceThread;
 	BithumbConnector bithumbConn;
 	PriceManager priceManager;
-	public PriceFetcher(PriceManager priceManager) throws MalformedURLException {
+	protected PriceFetcher(PriceManager priceManager) throws MalformedURLException {
 		this.priceManager = priceManager;
 		this.bithumbConn = new BithumbConnector(this);
 		this.priceThread = new Thread(bithumbConn);
 	}
 	
-	public void threadStart() {
+	protected void threadStart() {
 
 		this.priceThread.start();
 	}
 	
 	// string 을 json obj로 변환하는 메소드입니다.
 	@SuppressWarnings("rawtypes")
-	public void translateStringToJSON(String data) throws ParseException {
+	protected void translateStringToJSON(String data) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject jData = (JSONObject) ((JSONObject)parser.parse(data)).get("data");
 		Iterator itKey = jData.keySet().iterator();
@@ -53,7 +53,7 @@ class BithumbConnector implements Runnable{
 
 	PriceFetcher parent; // 이 스레드가 관리될 클래스
 	URL url; // bithumb url 주소입니다.
-	public BithumbConnector(PriceFetcher parent) throws MalformedURLException {
+	BithumbConnector(PriceFetcher parent) throws MalformedURLException {
 		this.parent = parent;
 		url = new URL("https://api.bithumb.com/public/ticker/ALL");
 	}
