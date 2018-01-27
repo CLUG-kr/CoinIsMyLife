@@ -2,6 +2,8 @@ package kr.clug.coinismylife.simulator.wallet;
 
 public class Order {
 	
+	public static final int BUY = 0, SELL = 1;
+	
 	private Wallet owner;
 	private int orderType;
 	private int coinType;
