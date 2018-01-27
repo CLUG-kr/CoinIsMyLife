@@ -39,7 +39,7 @@ public class PriceFetcher {
 			String key = (String) itKey.next();
 			if (!key.equals("date")) {
 				JSONObject coinObj = (JSONObject) jData.get(key);
-				priceManager.setPrice(key, (String)coinObj.get("average_price"));
+				priceManager.setPrice(key, (String)coinObj.get("closing_price"));
 				coinObj.get("average_price");
 			}
 		}
@@ -66,11 +66,10 @@ class BithumbConnector implements Runnable{
 				InputStream is = conn.getInputStream();
 				BufferedReader br = new BufferedReader(new InputStreamReader(is));
 				String str = br.readLine();
-				System.out.println("get::" + str);
 				parent.translateStringToJSON(str);
 				br.close();
 				is.close();
-				System.out.println("thread ran");
+				FetchEventHandler.callEvent(parent.getClass());
 			} catch (ParseException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -78,7 +77,6 @@ class BithumbConnector implements Runnable{
 			}
 			try {
 				Thread.sleep(200);
-				System.out.println("thread sleep");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
