@@ -34,11 +34,11 @@ public class FetchEventHandler {
 		}
 	}
 	
-	public static synchronized void callEvent(final Class<?> caller) {
-		callEventByAsynch(caller);
+	public static synchronized void callEvent(final Class<?> caller, double prices[]) {
+		callEventByAsynch(caller, prices);
 	}
  
-	private static synchronized void callEventByAsynch(final Class<?> caller) {
+	private static synchronized void callEventByAsynch(final Class<?> caller, double prices[]) {
 		ExecutorService executorService = Executors.newFixedThreadPool(MAX_THREAD_POOL);
  
 		for (final FetchEventListener listener : listeners) {
@@ -46,7 +46,7 @@ public class FetchEventHandler {
 				public void run() {
 					if (listener.getClass().getName().equals(caller.getName())) {
 					} else {
-						listener.onFetch();
+						listener.onFetch(prices);
 					}
 				}
 			});

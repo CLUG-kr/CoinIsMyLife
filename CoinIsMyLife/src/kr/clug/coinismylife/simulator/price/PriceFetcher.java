@@ -40,7 +40,7 @@ public final class PriceFetcher {
 			if (!key.equals("date")) {
 				JSONObject coinObj = (JSONObject) jData.get(key);
 				priceManager.setPrice(key, (String)coinObj.get("closing_price"));
-				coinObj.get("average_price");
+				//coinObj.get("average_price");
 			}
 		}
 	}
@@ -69,7 +69,7 @@ class BithumbConnector implements Runnable{
 				parent.translateStringToJSON(str);
 				br.close();
 				is.close();
-				FetchEventHandler.callEvent(parent.getClass());
+				FetchEventHandler.callEvent(parent.getClass(), parent.priceManager.getCoinPrices());
 			} catch (ParseException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
