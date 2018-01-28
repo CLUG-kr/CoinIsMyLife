@@ -7,13 +7,17 @@ public class Order {
 	private Wallet owner;
 	private int orderType;
 	private int coinType;
-	private double amout;
+	private double amount;
+	private double price;
+	private double totalPrice;
 	
-	public Order(Wallet owner, int orderType, int coinType, int amout) {
+	public Order(Wallet owner, int orderType, int coinType, double price, double amount, double totalPrice) {
 		this.owner = owner;
 		this.orderType = orderType;
 		this.coinType = coinType;
-		this.amout = amout;
+		this.amount = amount;
+		this.price = price;
+		this.totalPrice = totalPrice;
 	}
 	public Wallet getOwner() {
 		return owner;
@@ -24,7 +28,13 @@ public class Order {
 	public int getCoinType() {
 		return coinType;
 	}
-	public double getAmout() {
-		return amout;
+	public double getAmount() {
+		return amount;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public double getTotalPrice() {
+		return totalPrice;
 	}
 }
