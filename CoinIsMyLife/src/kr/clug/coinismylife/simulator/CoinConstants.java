@@ -29,6 +29,10 @@ public class CoinConstants {
 	public static final String KEY_BTG = "BTG";
 	public static final String KEY_EOS = "EOS";
 	
+	public static boolean validCoinIndex(int coinType) {
+		return (0 <= coinType && coinType <= AMOUNT_COIN-1);
+	}
+	
 	public static int getCoinIndex(String key) {
 		if (key.equals("BTC"))       return INDEX_BTC;
 		else if (key.equals("ETH"))  return INDEX_ETH;
