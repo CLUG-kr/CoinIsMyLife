@@ -1,5 +1,13 @@
 package kr.clug.coinismylife.simulator.wallet;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Hashtable;
 import java.util.Iterator;
 
@@ -17,6 +25,59 @@ public class WalletManager implements FetchEventListener{
 	public WalletManager() {
 		wallets = new Hashtable<>();
 		FetchEventHandler.addListener(this);
+	}
+	
+	// 지갑들을 폴더에 저장하는 함수
+	// 저장에 실패했을 경우 false 를 리턴하고 성공했을 경우 true를 리턴한다.
+	public synchronized boolean saveWallets(File folder) {
+		if (!folder.exists()) return false;
+		if (!folder.isDirectory()) return false;
+		for (Wallet w : wallets.values()) {
+			try {
+				File saveFile = new File(folder, w.getId()+".wallet");
+				if (!saveFile.exists()) saveFile.createNewFile();
+				FileOutputStream fos = new FileOutputStream(saveFile);
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(w);
+				oos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	// 지갑들을 불러오는 메소드
+	// 실패했을 경우 false 를 리턴한다.
+	public synchronized boolean loadWallets(File folder) {
+		if (!folder.exists()) return false;
+		if (!folder.isDirectory()) return false;
+		File files[] = folder.listFiles(new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.endsWith(".wallet");
+			}
+		});
+		for (File f : files) {
+			try {
+				FileInputStream fis = new FileInputStream(f);
+				ObjectInputStream ois = new ObjectInputStream(fis);
+				Wallet w = (Wallet) ois.readObject();
+				wallets.put(w.getId(), w);
+				ois.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				return false;
+			} catch (IOException e) {
+				e.printStackTrace();
+				return false;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	// 지갑을 추가하는 메소드

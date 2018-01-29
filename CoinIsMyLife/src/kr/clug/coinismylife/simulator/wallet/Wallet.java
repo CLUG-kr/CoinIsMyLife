@@ -1,10 +1,11 @@
 package kr.clug.coinismylife.simulator.wallet;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import kr.clug.coinismylife.simulator.CoinConstants;
 
-public final class Wallet {
+public final class Wallet implements Serializable{
 	
 	private String id;
 	private int money;
