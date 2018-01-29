@@ -152,7 +152,7 @@ public class WalletManager implements FetchEventListener{
 	}
 	public boolean orderBuy(String id, int coinType, double price, double amount) {
 		if (!isKeyExist(id)) return false;
-		if (CoinConstants.validCoinIndex(coinType)) return false;
+		if (!CoinConstants.validCoinIndex(coinType)) return false;
 		if (price <= 0.0 || amount <= 0.0) return false;
 		return orderBuy(getWallet(id), coinType, price, amount, price * amount);
 	}
@@ -174,7 +174,7 @@ public class WalletManager implements FetchEventListener{
 	}
 	public boolean orderSell(String id, int coinType, double price, double amount) {
 		if (!isKeyExist(id)) return false;
-		if (CoinConstants.validCoinIndex(coinType)) return false;
+		if (!CoinConstants.validCoinIndex(coinType)) return false;
 		if (price <= 0.0 || amount <= 0.0) return false;
 		return orderSell(getWallet(id), coinType, price, amount, price * amount);
 	}
