@@ -41,7 +41,6 @@ public final class PriceManager {
 				return false;
 			}
 			setCoinPrice(index, val);
-			System.out.println(key + " value is set " + value);
 			return true;
 		} catch(Exception e) {
 			return false;

@@ -1,6 +1,8 @@
 package kr.clug.coinismylife.simulator.wallet;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable{
 	
 	public static final int BUY = 0, SELL = 1;
 	
