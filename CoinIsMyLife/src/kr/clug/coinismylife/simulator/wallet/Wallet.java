@@ -15,6 +15,10 @@ public final class Wallet implements Serializable{
 		this.id = id;
 		this.orderList = new ArrayList<>();
 		this.coinAmount = new double[CoinConstants.AMOUNT_COIN];
+		money = 0;
+		for (int i = 0; i < coinAmount.length; i++) {
+			coinAmount[i] = 0.0;
+		}
 	}
 	
 	public String getId() {return id;}
