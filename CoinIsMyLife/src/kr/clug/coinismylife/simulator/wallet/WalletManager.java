@@ -151,7 +151,7 @@ public class WalletManager implements FetchEventListener{
 				else { // 판매 요청일 경우
 					if (sellCondition(order.getPrice(), prices[order.getCoinType()])) {
 						wallet.addCoinAmount(order.getCoinType(), -order.getAmount());
-						wallet.addMoney((int) order.getAmount() * prices[order.getCoinType()]);
+						wallet.addMoney((int) (order.getAmount() * prices[order.getCoinType()]));
 						OrderCloseEventHandler.callEvent(this.getClass(), order.getOwner(), order);
 						iter.remove();
 					}
